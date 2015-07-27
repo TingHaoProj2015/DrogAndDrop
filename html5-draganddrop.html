@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Drag and Drop</title>
+	<style type="text/css">
+	.dropArea{
+		width: 500px;
+		height: 400px;
+		border: 2px solid #ddd;
+		float:left;
+		margin: 10px;
+	}
+	img{
+		width: 500px;
+		height: 400px;
+	}
+	</style>
+	<script type="text/javascript">
+	// ondragstart
+	function onDragStart(event){
+		// event.target.id：被拖的元素
+		event.dataTransfer.setData("Text", event.target.id);
+	}
+	// ondragover
+	function allowDrop(event){
+		event.preventDefault();
+	}
+	// ondrop
+	function onDrop(event){
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Text");
+		// event.target：被放的元素
+		event.target.appendChild(document.getElementById(data));
+	}
+	</script>
+</head>
+
+<body>
+	<p>test</p>
+	<p>請拖動下面的圖片:</p>
+	<div id="dropArea1" class="dropArea" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
+	<div id="dropArea2" class="dropArea" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
+	<br>
+	<img id="draggableImage" draggable="true" ondragstart="onDragStart(event)" src="dis.jpg" alt="">
+</body>
+
+</html>
